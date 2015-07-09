@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+<script>
+	var setCookie=function(name,value,days){
+		var date=new Date(),
+		days=days?days:30;
+		date.setTime(date.getTime()+days*24*60*60*1000);
+		document.cookie=name+'='+escape(value)+';expires='+date.toUTCString();
+	}
+	var getCookie=function(name){//正则判断方法一
+		var arr=document.cookie.match(new RegExp("(^| )"+name+"(=[^;]*(;|$))"));
+		if(arr!=null) return arr[2];return '';
+		//console.log(arr)
+		//方法二
+		/*var cookies=document.cookie.split('=');
+		for(var i in cookies){
+			cookieArr=cookies[i].split(';');
+			if(cookieArr[0]==name){
+				return cookieArr[1];
+			}
+		}*/
+		
+	}
+	var delcookie=function(name){
+		var date=new Date();
+		date.setTime(date.getTime()-1);
+		document.cookie=name+'='+getCookie(name)+';expires='+date.toUTCString();
+	}
+	delcookie('age')
+	
+	
+</script>	
+</body>
+</html>
